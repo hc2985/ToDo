@@ -25,7 +25,7 @@ def index():
     if not user:
         return redirect(url_for("landing"))
 
-    todo_list = supabase.table("todos").select("*").eq("user_id", user).execute()
+    todo_list = supabase.table("todos").select("*").eq("user_id", user).order("id").execute()
     return render_template("home.html", todo_list=todo_list.data)
 
 @app.route("/add", methods=["POST"])
@@ -57,6 +57,14 @@ def delete(todo_id):
     supabase.table("todos").delete().eq("id", todo_id).execute()
     return redirect(url_for("index"))
 
+@app.route("/auth", methods=["POST"])
+def auth():
+    action = request.form.get("action")
+    if action == "login":
+        return login()
+    if action == "signup":
+        return signup()
+
 @app.route("/login", methods=["POST"])
 def login():
     #handle user login with email/password through supabase
@@ -76,15 +84,33 @@ def login():
 
     except Exception as e:
         print(f"Error logging in: {e}")
-        return render_template("login.html", error="Invalid credentials")
+        return render_template("landing.html", error="Invalid credentials")
 
 @app.route("/signup")
 def signup():
-    return render_template("signup.html")
+    #handle user login with email/password through supabase
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    try:
+        response = supabase.auth.sign_up({
+            'email': email,
+            'password': password,
+        })
+
+        session['user_id'] = response.user.id
+        session['user_email'] = response.user.email
+
+        return redirect(url_for("landing"))
+    
+    except Exception as e:
+        print(f"Error signing up: {e}")
+    return render_template("landing.html", error="Invalid credentials")
 
 @app.route("/logout", methods=["POST"])
 def logout():
     session.clear()
+    supabase.auth.sign_out()
     return redirect(url_for("landing"))
 
 @app.route("/about")

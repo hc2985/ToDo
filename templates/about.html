@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </head>
 <body>
-<h1>Basic ToDo App</h1>
+<div class="ui attached stackable menu">
+        <div class="ui container">
+            <a class="item" href="/home">
+                <i class="home icon"></i> Home
+            </a>
+            <a class="item" href="/about">About</a>
+            <div class="right item">
+                <form action="/logout" method="POST">
+                    <button class="ui button" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div style = "margin-top: 20px;" class="ui container">
+
+    <div class="ui center aligned header"> 
+        <h1 class="ui blue header"> About </h1>
+    </div>
+    <p>This is a simple Todo application built with Flask and Semantic UI. Backend is powered by Flask and Supabase.</p>
+
+    </div>
 </body>
 </html>

@@ -10,24 +10,25 @@
 </head>
 <body>
     <div style = "margin-top: 20px;" class="ui container">
+    
+    <div class="ui center aligned header"> 
+        <h1 class="ui blue header"> Welcome to Todo App </h1>
+    </div>
 
-    <h1 class="ui center aligned header"> Welcome to Todo App </h1>
-
-    <form class = "ui form" action ="/login" method="POST">
+    <form class = "ui form" action = "/auth" method="POST">
         <div class = "field">
             <label class="ui huge header" for="email">Email:</label>
             <input type="text" name="email" placeholder="Enter your email...">
+            <div style="margin-top: -5px" class="ui hidden divider"></div>
             <label class="ui huge header" for="password">Password:</label>
             <input type="password" name="password" placeholder="Enter your password...">
-            <br>
-            <button class="ui primary button" type="submit">Log In</button>
+        </div>
+        <div>
+            <button class="ui primary button" name="action" value="login">Log In</button>
+            <button class="ui button" name="action" value="signup">Sign Up</button>
         </div>
 
     </form>
-
-    <div class="ui center aligned container">
-        <a href = "/signup" class="ui button">Sign Up</a>
-    </div>
 
     </div>
 </body>
