@@ -6,30 +6,99 @@
     <title>Landing Page</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </head>
 <body>
     <div style = "margin-top: 20px;" class="ui container">
     
-    <div class="ui center aligned header"> 
-        <h1 class="ui blue header"> Welcome to Todo App </h1>
-    </div>
-
-    <form class = "ui form" action = "/auth" method="POST">
-        <div class = "field">
-            <label class="ui huge header" for="email">Email:</label>
-            <input type="text" name="email" placeholder="Enter your email...">
-            <div style="margin-top: -5px" class="ui hidden divider"></div>
-            <label class="ui huge header" for="password">Password:</label>
-            <input type="password" name="password" placeholder="Enter your password...">
-        </div>
-        <div>
-            <button class="ui primary button" name="action" value="login">Log In</button>
-            <button class="ui button" name="action" value="signup">Sign Up</button>
+        <div class="ui center aligned header"> 
+            <h1 class="ui blue header"> Welcome to Todo App </h1>
         </div>
 
-    </form>
+        <!-- Login/Signup Form -->
+        <form class = "ui form" action = "/auth" method="POST">
+            <div class = "field">
+                <label class="ui huge header" for="email">Email:</label>
+                <input type="text" name="email" placeholder="Enter your email...">
+                <div style="margin-top: -5px" class="ui hidden divider"></div>
+                <label class="ui huge header" for="password">Password:</label>
+                <input type="password" name="password" placeholder="Enter your password...">
+            </div>
+            <div>
+                <button class="ui primary button" name="action" value="login">Log In</button>
+                <button class="ui button" name="action" value="signup">Sign Up</button>
+            </div>
+        </form>
 
     </div>
+
+
+    <!-- Login Error Modal -->
+    {% if error and type == "login" %}
+    <div class="ui basic modal" id="loginerror">
+        <div class="ui icon header">
+            <i class="exclamation triangle icon"></i>
+            Oops!
+        </div>
+        <div class="content">
+            <p>{{ error }}</p>
+        </div>
+        <div class="actions">
+            <div class="ui basic red cancel inverted button">
+                <i class="remove icon"></i>
+                OK
+            </div>
+        </div>
+    </div>
+    <script>
+    $('#loginerror').modal('show');
+    </script>
+    {% endif %}
+
+    <!-- Signup Error Modal -->
+    {% if error and type == "signup" %}
+    <div class="ui basic modal" id="signuperror">
+        <div class="ui icon header">
+            <i class="exclamation triangle icon"></i>
+            Oops!
+        </div>
+        <div class="content">
+            <p>{{ error }}</p>
+        </div>
+        <div class="actions">
+            <div class="ui basic red cancel inverted button">
+                <i class="remove icon"></i>
+                OK
+            </div>
+        </div>
+    </div>
+    <script>
+    $('#signuperror').modal('show');
+    </script>
+    {% endif %}
+
+     <!-- Signup Error Modal -->
+    {% if error and type == "existing" %}
+    <div class="ui basic modal" id="existingerror">
+        <div class="ui icon header">
+            <i class="exclamation triangle icon"></i>
+            Oops!
+        </div>
+        <div class="content">
+            <p>{{ error }}</p>
+        </div>
+        <div class="actions">
+            <div class="ui basic red cancel inverted button">
+                <i class="remove icon"></i>
+                OK
+            </div>
+        </div>
+    </div>
+    <script>
+    $('#existingerror').modal('show');
+    </script>
+    {% endif %}
+
 </body>
 </html>
